@@ -51,7 +51,7 @@ const HomeScreen = () => {
         <View className="bg-[#c9c9c9] flex-1 space-x-2 flex-row items-center p-2 rounded-md">
           {/* <SearchIcon /> */}
           <TouchableOpacity>
-            <MagnifyingGlassPlusIcon size={22} fill="gray" />
+            <MagnifyingGlassPlusIcon size={22} fill="gray"/>
           </TouchableOpacity>
 
           <TextInput
