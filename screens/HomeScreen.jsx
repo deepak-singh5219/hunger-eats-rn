@@ -5,6 +5,7 @@ import {
   TextInput,
   Pressable,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -17,6 +18,8 @@ import {
   MagnifyingGlassPlusIcon,
   AdjustmentsHorizontalIcon,
 } from "react-native-heroicons/solid";
+import Categories from "../components/Categories";
+import FeaturedRow from "../components/FeaturedRow";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -28,6 +31,7 @@ const HomeScreen = () => {
   }, []);
   return (
     <SafeAreaView className="mt-12">
+      {/* Header  */}
       <View className="flex-row w-full items-center justify-between px-6">
         <View className="flex-row items-center justify-center space-x-2">
           <TouchableOpacity>
@@ -47,7 +51,7 @@ const HomeScreen = () => {
 
         <UserIcon size={25} fill="#46daf4" />
       </View>
-      <View className="flex-row w-full items-center space-x-2 justify-between px-6 mt-2">
+      <View className="flex-row w-full mb-2 items-center space-x-2 justify-between px-6 mt-2">
         <View className="bg-[#c9c9c9] flex-1 space-x-2 flex-row items-center p-2 rounded-md">
           {/* <SearchIcon /> */}
           <TouchableOpacity>
@@ -64,6 +68,17 @@ const HomeScreen = () => {
           <AdjustmentsHorizontalIcon size={24} fill="#46daf4" />
         </TouchableOpacity>
       </View>
+
+      <ScrollView>
+      {/* Categories  */}
+      <Categories/>
+      <FeaturedRow head="Offers near you!" description="Why not support your local restraunt tonight"/>
+      <FeaturedRow head="Offers near you!" description="Why not support your local restraunt tonight"/>
+      <FeaturedRow head="Offers near you!" description="Why not support your local restraunt tonight"/>
+      <FeaturedRow head="Offers near you!" description="Why not support your local restraunt tonight"/>
+      </ScrollView>
+     
+      
     </SafeAreaView>
   );
 };
