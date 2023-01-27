@@ -1,13 +1,14 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { MapPinIcon, StarIcon } from 'react-native-heroicons/solid'
+import { urlFor } from '../sanity'
 
 const FeaturedRowCard = ({imgUrl,head,rating,address,special}) => {
   return (
     <View className="mx-1 bg-white drop-shadow-md rounded-sm">
         <Image
         source={{
-            uri:imgUrl
+            uri:urlFor(imgUrl).url(),
         }}
         className="w-64 h-36 rounded-sm"
         />
