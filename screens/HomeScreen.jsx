@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   UserIcon,
@@ -20,15 +20,37 @@ import {
 } from "react-native-heroicons/solid";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
+import sanityClient from "../sanity";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const [featuredCategory, setFeaturedCategory] = useState([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
+
+  useEffect(() => {
+  sanityClient.fetch(
+    `*[_type == 'featured'] | order(_createdAt)
+    {
+      _id,
+       name,
+      restaurants[]->{
+        ...,
+        dishes[]->,
+        type->{
+          none
+        }
+      }, 
+      short_description
+    }`
+  )
+  .then((data) => setFeaturedCategory(data))
+  .catch((err) => console.log(err.message));
+  },[]);
   return (
     <SafeAreaView className="mt-12">
       {/* Header  */}
@@ -72,10 +94,19 @@ const HomeScreen = () => {
       <ScrollView>
       {/* Categories  */}
       <Categories/>
-      <FeaturedRow head="Offers near you!" description="Why not support your local restraunt tonight"/>
-      <FeaturedRow head="Offers near you!" description="Why not support your local restraunt tonight"/>
-      <FeaturedRow head="Offers near you!" description="Why not support your local restraunt tonight"/>
-      <FeaturedRow head="Offers near you!" description="Why not support your local restraunt tonight"/>
+
+     {
+
+      featuredCategory?.map((category) => 
+      <FeaturedRow 
+      key={category._id}
+      id={category._id}
+      head={category.name} 
+      description={category.short_description}
+      restaurants={category.restaurants}
+      />
+      )
+      }
       </ScrollView>
      
       
