@@ -22,6 +22,7 @@ import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
 import sanityClient from "../sanity";
 
+
 const HomeScreen = () => {
   const navigation = useNavigation();
   const [featuredCategory, setFeaturedCategory] = useState([]);
